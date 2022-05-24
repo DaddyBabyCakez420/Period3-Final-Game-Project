@@ -4,26 +4,36 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
-    private Rigidbody2D rb;
-
+    [SerializeField] private float speed;
+    private Rigidbody2D body;
+    private Animator anim;
     // Start is called before the first frame update
     void Start()
     {
 
-        rb = GetComponent<Rigidbody2D>();
-
+        body = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float dirX = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(dirX * 7f, rb.velocity.y);
+        float horizontalInput = Input.GetAxis("Horizontal");
+        body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
+
+        //Flip Player when Moving Left-Right
+        if (horizontalInput > 0.01f)
+            transform.localScale = Vector3.one;
+        else if (horizontalInput < -0.01f)
+            transform.localScale = new Vector3(-1, 1, 1);
 
         if(Input.GetButtonDown("Jump"))
         {
-            rb.velocity = new Vector2(rb.velocity.x, 8.5f);
+            body.velocity = new Vector2(body.velocity.x, speed);
         }
+
+        //Set animatior parameters
+        anim.SetBool("run", horizontalInput!= 0);
     }
+
 }
