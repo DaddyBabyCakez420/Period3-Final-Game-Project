@@ -29,11 +29,20 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetButtonDown("Jump"))
         {
+            SoundManager.PlaySound("JumpSound");
             body.velocity = new Vector2(body.velocity.x, speed);
         }
 
         //Set animatior parameters
         anim.SetBool("run", horizontalInput!= 0);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.CompareTag("Coins"))
+        {
+            Destroy(other.gameObject);
+        }
     }
 
 }
