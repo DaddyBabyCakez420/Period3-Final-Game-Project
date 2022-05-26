@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetButtonDown("Jump"))
         {
             SoundManager.PlaySound("JumpSound");
-            body.velocity = new Vector2(body.velocity.x, speed);
+            body.velocity = new Vector2(body.velocity.x, 7.5f);
         }
 
         //Set animatior parameters
