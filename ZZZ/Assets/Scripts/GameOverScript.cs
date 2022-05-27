@@ -24,4 +24,8 @@ public class GameOverScript : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
 
+    public void Level2Restart()
+    {
+        SceneManager.LoadScene("Level2");
+    }
 }
